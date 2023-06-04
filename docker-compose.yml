@@ -1,0 +1,36 @@
+# Menggunakan Docker Compose versi 3.7
+version: "3.7"
+
+# Memiliki dua buah service: item-app dan item-db
+services:
+  item-app:
+    # Menggunakan image item-app:v1 dari GitHub Packages sebagai image untuk service item-app
+    image: docker.pkg.github.com/nadiawaa/a433-microservices/item-app:v1
+
+    # Mengaitkan port 80 dari host dengan port 8080 di container untuk service item-app
+    ports:
+      - 80:8080
+
+    # Menentukan bahwa service item-app bergantung pada service item-db
+    depends_on:
+      - item-db
+
+    # Menentukan kebijakan restart menjadi "always" untuk service item-app
+    restart: always
+
+
+
+  item-db:
+    # Menggunakan image mongo:3 dari Docker Hub sebagai image untuk service item-db
+    image: mongo:3
+
+    # Mengaitkan volume bernama app-db dengan direktori /data/db di container untuk service item-db
+    volumes:
+      - app-db:/data/db
+
+    # Menentukan kebijakan restart menjadi "always" untuk service item-db
+    restart: always
+
+# Membuat volume bernama app-db
+volumes:
+  app-db:
