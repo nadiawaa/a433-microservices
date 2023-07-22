@@ -3,10 +3,11 @@ kind: Service
 metadata:
   labels:
     app: karsajobs
-  name: karsajobs
+  name: karsajobs-backend
 spec:
   ports:
   - port: 8000
+    nodePort: 30007
   selector:
     app: karsajobs
   type: NodePort

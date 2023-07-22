@@ -8,7 +8,7 @@ kind: Service
 # Disini didefinisikan nama Service sebagai karsajobs-frontend dan label dengan nilai app: karsajobs-frontend.
 metadata:
   labels:
-    app: karsajobs-frontend
+    app: karsajobs-ui
   name: karsajobs-frontend
 
 # Spesifikasikan resource. 

@@ -1,10 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mongo-configmap
+  name: mongo-config
 data:
   mongodb.conf: |
-    APP_PORT: 8080
-    MONGO_HOST: "mongohost"
-    MONGO_USER: "admin"
-    MONGO_PASS: "admin"
+    storage:
+      dbPath:/data/db

@@ -1,55 +1,34 @@
-# API Yang idgunakan versi 1
 apiVersion: apps/v1
-
-# Jenis object : deployment
 kind: Deployment
-
-# Metadata
 metadata:
   name: karsajobs
-  namespace: karsajobs
-
-# Spesifikasi
 spec:
-
-  # Buat 1 replica
   replicas: 1
-
-  # Select matchlabels ke karsajob-app
   selector:
     matchLabels:
-      app: karsajobs-app
-
+      app: karsajobs
   template:
     metadata:
       labels:
-        app: karsajobs-app
-
+        app: karsajobs
     spec:
       containers:
-        name: karsajobs
-
-        # Image dari Github Packages
-        image: ghcr.io/nadiawaa/a433-microservices/nadiawaa/karsajobs:latest
-        ports:
-        - containerPort: 8080
-
-      - env:
-        - name: APP_PORT
-          value: "8080"
-
-        - name: MONGO_USER
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: MONGO_ROOT_USERNAME
-
-        - name: MONGO_PASS
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: MONGO_ROOT_PASSWORD
-
-        - name: MONGO_HOST
-          value: karsajob-database
-        imagePullPolicy: Always
+        - name: karsajobs
+          image: ghcr.io/nadiawaa/a433-microservices/nadiawaa/karsajobs:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_PORT
+              value: "8080"
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_ROOT_USERNAME
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_ROOT_PASSWORD
+            - name: MONGO_HOST
+              value: karsajob-database
