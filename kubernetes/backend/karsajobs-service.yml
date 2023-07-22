@@ -6,7 +6,6 @@ spec:
   selector:
     app: karsajobs-app
   ports:
-  - name: default
-    port: 8000
+  - port: 8000
     protocol: TCP
   type: NodePort
