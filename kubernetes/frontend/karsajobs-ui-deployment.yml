@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karsajobs-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karsajobs-ui-app
+  template:
+    metadata:
+      labels:
+        app: karsajobs-ui-app
+    spec:
+      containers:
+        - name: karsajobs-ui
+          image: https://ghcr.io/nadiawaa/a433-microservices/nadiawaa/karsajobs-ui:latest
+          ports:
+            - containerPort: 8080

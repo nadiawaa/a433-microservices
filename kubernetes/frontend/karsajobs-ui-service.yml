@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: karsajobs-ui
+spec:
+  selector:
+    app: karsajobs-ui-app
+  ports:
+  - name: default
+    port: 8000
+    protocol: TCP
+  type: NodePort
