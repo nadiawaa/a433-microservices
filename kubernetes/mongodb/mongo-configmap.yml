@@ -4,5 +4,7 @@ metadata:
   name: mongo-configmap
 data:
   mongodb.conf: |
-    storage:
-      dbPath:/data/db
+    APP_PORT: 8080
+    MONGO_HOST: "mongohost"
+    MONGO_USER: "admin"
+    MONGO_PASS: "admin"
