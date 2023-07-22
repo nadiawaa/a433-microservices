@@ -1,12 +1,23 @@
+#  Kubernetes mendukung beberapa versi API. v1 (versi satu) adalah versi API inti yang berisi banyak resource paling umum seperti Pod dan Node.
 apiVersion: v1
+
+# Mengindikasikan resource yang didefinisikan. Dalam kasus ini Service
 kind: Service
+
+# Berisi informasi yang relevan terkait resource dan dapat membantu dalam pengidentifikasian. 
+# Disini didefinisikan nama Service sebagai karsajobs-frontend dan label dengan nilai app: karsajobs-frontend.
 metadata:
-  name: karsajobs-ui
+  labels:
+    app: karsajobs-frontend
+  name: karsajobs-frontend
+
+# Spesifikasikan resource. 
+# Pada kasus ini, didefinisikan spesifikasi mengekspos port 8000, menggunakan selector app:karsajobs-ui, memakai tipe NodePort.
 spec:
-  selector:
-    app: karsajobs-ui-app
-  ports:
-  - name: default
-    port: 8000
-    protocol: TCP
   type: NodePort
+  ports:
+  - port: 8000
+    nodePort: 30007
+  selector:
+    app: karsajobs-ui
+  
