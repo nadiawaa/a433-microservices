@@ -1,1 +1,2 @@
-ss
+ghcr.io/nadiawaa/a433-microservices/nadiawaa/karsajobs-ui:latest
+ghcr.io/nadiawaa/a433-microservices/nadiawaa/karsajobs:latest
