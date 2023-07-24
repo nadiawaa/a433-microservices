@@ -14,30 +14,19 @@ spec:
         app: karsajobs-database
     spec:
       containers:
-        - name: mongo
+        - name: mongodb
           image: mongo:latest 
           ports:
             - containerPort: 27017 
-          env:
-            - name: MONGO_INITDB_ROOT_USERNAME_FILE
-              value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
-            - name: MONGO_INITDB_ROOT_PASSWORD_FILE
-              value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+          envFrom:
+            - configMapRef:
+                name: mongo-config
+            - secretRef:
+                name: mongo-secret
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db 
-            - name: mongo-config
-              mountPath: /config
-              readOnly: true
-            - name: mongo-secret
-              mountPath: /etc/mongo-credentials
-              readOnly: true
-
-  volumeClaimTemplates:
-    - metadata:
-        name: mongo-persistent-storage
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage: 1Gi
+      volumes:
+        - name: mongo-persistent-storage
+          persistentVolumeClaim:
+            claimName: mongo-pv-claim

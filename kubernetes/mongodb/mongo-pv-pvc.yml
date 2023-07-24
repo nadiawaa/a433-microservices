@@ -11,7 +11,7 @@ spec:
     - ReadWriteOnce
   storageClassName: manual 
   hostPath:
-    path: "/mnt/data/mongo"
+    path: /data/db
 
 ---
 # deklarasi konfigurasi untuk PVC
