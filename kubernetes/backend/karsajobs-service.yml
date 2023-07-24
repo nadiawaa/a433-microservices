@@ -6,7 +6,7 @@ metadata:
   name: karsajobs-backend
 spec:
   ports:
-  - port: 8000
+  - port: 8080
     nodePort: 30007
   selector:
     app: karsajobs
