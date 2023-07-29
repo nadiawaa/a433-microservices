@@ -13,8 +13,8 @@ COPY index.js /app/
 # Menjalankan perintah npm install untuk menginstal dependencies dari package.json
 RUN npm install
 
-# Mengekspos port 3000 untuk koneksi dari luar container
-EXPOSE 3000
+# Mengekspos port 3001 untuk koneksi dari luar container
+EXPOSE 3001
 
 # Perintah yang akan dijalankan saat container berjalan, yaitu menjalankan aplikasi Node.js
 CMD ["node", "index.js"]
