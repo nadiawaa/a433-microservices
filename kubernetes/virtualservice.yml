@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: shipping-virtualservice
+  namespace: istio-system
+spec:
+  gateways:
+    - shipping-gateway
+  hosts:
+    - shipping.anbutech.xyz
+  http:
+    - match:
+        - uri:
+            exact: /shipping
+      route:
+        - destination:
+            host: shipping.dicoding.svc.cluster.local
+            port:
+              number: 80
