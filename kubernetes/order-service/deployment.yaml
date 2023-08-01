@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+# Versi API Kubernetes yang digunakan adalah apps/v1. Ini adalah versi API utama Kubernetes untuk objek Deployment.
+
+kind: Deployment
+# Jenis objek yang didefinisikan adalah Deployment. Deployment digunakan untuk mengelola aplikasi yang akan dijalankan di dalam cluster Kubernetes.
+
+metadata:
+  name: order
+# Informasi metadata untuk objek Deployment, seperti nama objek.
+
+spec:
+  replicas: 1
+# Menentukan jumlah replika (instance) dari aplikasi yang akan dijalankan. Di sini, hanya ada satu replika dari aplikasi "order".
+
+  selector:
+    matchLabels:
+      app: order
+# Selector menentukan label yang digunakan untuk memilih pod-pod mana yang akan menjadi bagian dari Deployment ini. Di sini, pod dengan label "app: order" akan dipilih.
+
+  template:
+    metadata:
+      labels:
+        app: order
+# Template untuk Pod yang akan dibuat oleh Deployment ini, di sini menggunakan label "app: order".
+
+    spec:
+      containers:
+        - name: order
+          image: ghcr.io/nadiawaa/a433-microservices/nadiawaa/order-service:latest
+# Mendefinisikan container yang akan dijalankan dalam Pod. Container bernama "order" akan menggunakan gambar "ghcr.io/nadiawaa/a433-microservices/nadiawaa/order-service" dengan tag "latest".
+
+          ports:
+            - containerPort: 3000
+# Menentukan port yang akan di-expose oleh container, di sini port 3000 akan di-expose untuk aplikasi "order".
+
+          env:
+            - name: AMQP_URL
+              value: "amqp://user:osdwq0dTLtKBnft3@rabbitmq-service:5672/myvhost"
+# Variabel lingkungan (environment variable) AMQP_URL yang akan diberikan ke container. Nilai variabelnya adalah "amqp://user:osdwq0dTLtKBnft3@rabbitmq-service:5672/myvhost".
+
+            - name: PORT
+              value: "5672"
+# Variabel lingkungan (environment variable) PORT yang akan diberikan ke container. Nilai variabelnya adalah "5672".

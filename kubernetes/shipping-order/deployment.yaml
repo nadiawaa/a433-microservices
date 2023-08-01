@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping # Nama dari sumber daya Deployment
+
+spec:
+  replicas: 1 # Jumlah replika yang diinginkan untuk Deployment
+  selector:
+    matchLabels:
+      app: shipping # Selector akan mencari pod dengan label yang sesuai 'app: shipping'
+
+  template: # Template untuk membuat pod dalam Deployment
+    metadata:
+      labels:
+        app: shipping # Label yang diterapkan pada pod yang dibuat dari template ini
+
+    spec: # Spesifikasi dari template pod
+      containers: # Daftar kontainer yang akan dijalankan dalam pod
+        - name: shipping # Nama kontainer
+          image: ghcr.io/nadiawaa/a433-microservices/nadiawaa/shipping-service:latest # Gambar Docker yang digunakan untuk kontainer ini
+          ports:
+            - containerPort: 3000 # Port yang akan diexpose pada kontainer
+
+          env: # Variabel lingkungan untuk kontainer
+            - name: AMQP_URL
+              value: "amqp://user:osdwq0dTLtKBnft3@rabbitmq-service:5672/myvhost"
+
+            - name: PORT
+              value: "3000"
+

@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1beta1
+# Versi API Istio yang digunakan adalah v1beta1. Ini adalah versi beta, perlu diperhatikan karena kemungkinan perubahan di versi selanjutnya.
+
+kind: Gateway
+# Jenis objek yang didefinisikan adalah Gateway. Gateway mengatur lalu lintas masuk ke dalam cluster Istio.
+
+metadata:
+  name: order-gateway
+  namespace: istio-system
+# Informasi metadata untuk objek Gateway, seperti nama objek dan namespace tempat objek tersebut berada.
+
+spec:
+  selector:
+    istio: ingressgateway
+# Selector menentukan label yang digunakan untuk memilih pod mana yang akan berfungsi sebagai gateway lalu lintas masuk (ingress gateway) untuk Gateway ini. Di sini, pod yang memiliki label "istio: ingressgateway" akan menjadi gateway untuk lalu lintas masuk.
+
+  servers:
+  - hosts:
+    - order.anbutech.xyz
+# Mendefinisikan host yang akan di-handle oleh Gateway ini, yaitu "order.anbutech.xyz".
+
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
+# Mengatur konfigurasi port untuk Gateway ini. Gateway akan mendengarkan permintaan HTTP pada port 80.

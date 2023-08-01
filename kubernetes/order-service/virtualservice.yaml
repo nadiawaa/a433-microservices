@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1beta1
+# Versi API Istio yang digunakan adalah v1beta1. Ini adalah versi beta, perlu diperhatikan karena kemungkinan perubahan di versi selanjutnya.
+
+kind: VirtualService
+# Jenis objek yang didefinisikan adalah VirtualService. VirtualService digunakan untuk mengkonfigurasi rute lalu lintas dalam cluster Istio.
+
+metadata:
+  name: order-virtualservice
+  namespace: istio-system
+# Informasi metadata untuk objek VirtualService, seperti nama objek dan namespace tempat objek tersebut berada.
+
+spec:
+  gateways:
+    - order-gateway
+# Mendefinisikan gateway yang akan digunakan oleh VirtualService ini. Gateway "order-gateway" akan digunakan untuk mengatur lalu lintas masuk.
+
+  hosts:
+    - order.anbutech.xyz
+# Mendefinisikan host yang akan dituju oleh VirtualService ini, yaitu "order.anbutech.xyz".
+
+  http:
+    - match:
+        - uri:
+            exact: /order
+# Berlaku untuk permintaan HTTP yang memiliki path yang tepat (exact) "/order".
+
+      route:
+        - destination:
+            host: order.dicoding.svc.cluster.local
+            port:
+              number: 80
+# Mengarahkan permintaan yang cocok (match) ke layanan dengan host "order.dicoding.svc.cluster.local" pada port 80.

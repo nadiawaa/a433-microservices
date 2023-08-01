@@ -1,0 +1,23 @@
+apiVersion: v1
+# Versi API Kubernetes yang digunakan adalah v1. Ini adalah versi API utama Kubernetes.
+
+kind: Service
+# Jenis objek yang didefinisikan adalah Service. Service adalah cara untuk mengekspos aplikasi yang berjalan di dalam cluster Kubernetes.
+
+metadata:
+  name: order
+# Informasi metadata untuk objek Service, seperti nama objek.
+
+spec:
+  selector:
+    app: order
+# Selector menentukan label yang digunakan untuk memilih pod mana yang akan ditargetkan oleh Service ini. Di sini, Service akan menargetkan pod yang memiliki label "app: order".
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+# Menentukan pengaturan port untuk Service ini. Permintaan yang datang ke port 80 akan diarahkan ke port 3000 pada pod yang sesuai.
+
+  type: ClusterIP
+# Jenis Service yang digunakan adalah ClusterIP. Ini berarti Service ini hanya dapat diakses dari dalam cluster Kubernetes dan memiliki alamat IP Cluster internal.
